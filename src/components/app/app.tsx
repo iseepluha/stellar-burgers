@@ -24,7 +24,6 @@ const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const backgroundLocation = location.state?.background;
-  console.log('zhopa');
 
   useEffect(() => {
     dispatch(fetchIngredients());
