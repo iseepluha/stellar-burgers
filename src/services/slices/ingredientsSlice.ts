@@ -36,20 +36,9 @@ export const ingredientsSlice = createSlice({
       .addCase(fetchIngredients.rejected, (state, action) => {
         state.isIngredientsLoading = false;
         state.error =
-          action.error.message ?? 'Произошла ошибка при загрузке ингридиентов';
+          action.error.message ?? 'Произошла ошибка при загрузке ингредиентов';
       });
-  },
-  selectors: {
-    isIngredientsLoadingSelector: (state) => state.isIngredientsLoading,
-    ingredientsSelector: (state) => state.ingredients,
-    errorSelector: (state) => state.error
   }
 });
 
 export default ingredientsSlice.reducer;
-
-export const {
-  isIngredientsLoadingSelector,
-  ingredientsSelector,
-  errorSelector
-} = ingredientsSlice.selectors;

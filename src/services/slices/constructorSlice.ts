@@ -39,7 +39,7 @@ export const createOrder = createAsyncThunk<TOrder, void, { state: RootState }>(
 
     const ingredientIds = [
       bun._id,
-      ...ingredients.map((ingredient) => ingredient.id),
+      ...ingredients.map((ingredient) => ingredient._id),
       bun._id
     ];
 
@@ -103,9 +103,6 @@ export const burgerConstructorSlice = createSlice({
       .addCase(createOrder.rejected, (state) => {
         state.orderRequest = false;
       });
-  },
-  selectors: {
-    constructorItemsSelector: (state) => state.constructorItems
   }
 });
 
@@ -118,5 +115,3 @@ export const {
   closeModal,
   clearIngredients
 } = burgerConstructorSlice.actions;
-
-export const { constructorItemsSelector } = burgerConstructorSlice.selectors;

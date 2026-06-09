@@ -24,13 +24,19 @@ export const BurgerConstructor: FC = () => {
   const orderModalData = useSelector(
     (state) => state.burgerConstructor.orderModalData
   );
+  const user = useSelector((state) => state.user.user);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
-
+    if (!user) {
+      navigate('/login');
+      return;
+    }
     dispatch(createOrder())
       .unwrap()
-      .then(() => dispatch(clearIngredients()))
+      .then(() => {
+        dispatch(clearIngredients());
+      })
       .catch((error) => console.error(error));
   };
   const closeOrderModal = () => {
