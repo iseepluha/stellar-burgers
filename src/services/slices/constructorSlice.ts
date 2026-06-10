@@ -86,6 +86,23 @@ export const burgerConstructorSlice = createSlice({
     },
     closeModal: (state) => {
       state.orderModalData = null;
+    },
+    replaceIngredient: (state, action) => {
+      const { ingredientId, direction } = action.payload;
+      const ingredients = state.constructorItems.ingredients;
+      const currentIndex = ingredients.findIndex(
+        (ingredient) => ingredient.id === ingredientId
+      );
+
+      if (direction === 'up' && currentIndex > 0) {
+        const [movedIngredient] = ingredients.splice(currentIndex, 1);
+        ingredients.splice(currentIndex - 1, 0, movedIngredient);
+      }
+
+      if (direction === 'down' && currentIndex < ingredients.length - 1) {
+        const [movedIngredient] = ingredients.splice(currentIndex, 1);
+        ingredients.splice(currentIndex + 1, 0, movedIngredient);
+      }
     }
   },
   extraReducers: (builder) => {
@@ -113,5 +130,6 @@ export const {
   addIngredient,
   removeIngredient,
   closeModal,
-  clearIngredients
+  clearIngredients,
+  replaceIngredient
 } = burgerConstructorSlice.actions;
