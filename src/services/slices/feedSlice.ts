@@ -40,7 +40,22 @@ export const feedSlice = createSlice({
         state.isOrdersLoading = false;
         state.error = action.error.message || 'Не удалось загрузить ленту';
       });
+  },
+  selectors: {
+    selectIsFeedOrdersLoading: (state) => state.isOrdersLoading,
+    selectFeedOrders: (state) => state.orders,
+    selectTotal: (state) => state.total,
+    selectTotalToday: (state) => state.totalToday,
+    selectFeedError: (state) => state.error
   }
 });
 
 export default feedSlice.reducer;
+
+export const {
+  selectIsFeedOrdersLoading,
+  selectFeedOrders,
+  selectTotal,
+  selectTotalToday,
+  selectFeedError
+} = feedSlice.selectors;

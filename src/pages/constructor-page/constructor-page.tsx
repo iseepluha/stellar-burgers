@@ -6,13 +6,16 @@ import { BurgerIngredients } from '@components';
 import { BurgerConstructor } from '@components';
 import { Preloader } from '@ui';
 import { FC } from 'react';
+import {
+  selectIngredients,
+  selectIngredientsError,
+  selectIsIngredientsLoading
+} from '../../services/slices/ingredientsSlice';
 
 export const ConstructorPage: FC = () => {
-  const isIngredientsLoading = useSelector(
-    (state) => state.ingredients.isIngredientsLoading
-  );
-  const ingredients = useSelector((state) => state.ingredients.ingredients);
-  const error = useSelector((state) => state.ingredients.error);
+  const isIngredientsLoading = useSelector(selectIsIngredientsLoading);
+  const ingredients = useSelector(selectIngredients);
+  const error = useSelector(selectIngredientsError);
 
   return isIngredientsLoading ? (
     <Preloader />

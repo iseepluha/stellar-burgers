@@ -120,6 +120,11 @@ export const burgerConstructorSlice = createSlice({
       .addCase(createOrder.rejected, (state) => {
         state.orderRequest = false;
       });
+  },
+  selectors: {
+    selectConstructorItems: (state) => state.constructorItems,
+    selectOrderRequest: (state) => state.orderRequest,
+    selectOrderModalData: (state) => state.orderModalData
   }
 });
 
@@ -133,3 +138,9 @@ export const {
   clearIngredients,
   replaceIngredient
 } = burgerConstructorSlice.actions;
+
+export const {
+  selectConstructorItems,
+  selectOrderRequest,
+  selectOrderModalData
+} = burgerConstructorSlice.selectors;

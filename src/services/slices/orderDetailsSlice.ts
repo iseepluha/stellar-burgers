@@ -28,7 +28,7 @@ export const orderDetailsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getOrder.pending, (state, action) => {
+      .addCase(getOrder.pending, (state) => {
         state.error = null;
         state.isLoading = true;
       })
@@ -41,7 +41,18 @@ export const orderDetailsSlice = createSlice({
         state.error =
           action.error.message || 'Не удалось загрузить детали заказа';
       });
+  },
+  selectors: {
+    selectOrderDetailsOrders: (state) => state.orders[0],
+    selectOrderDetailsIsLoading: (state) => state.isLoading,
+    selectOrderDetailsError: (state) => state.error
   }
 });
 
 export default orderDetailsSlice.reducer;
+
+export const {
+  selectOrderDetailsOrders,
+  selectOrderDetailsIsLoading,
+  selectOrderDetailsError
+} = orderDetailsSlice.selectors;

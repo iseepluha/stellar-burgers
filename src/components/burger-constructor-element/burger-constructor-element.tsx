@@ -12,12 +12,10 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
     const dispatch = useDispatch();
     const ingredientId = ingredient.id;
     const handleMoveDown = () => {
-      console.log('Переносим вниз');
       dispatch(replaceIngredient({ ingredientId, direction: 'down' }));
     };
 
     const handleMoveUp = () => {
-      console.log('Переносим вверх');
       dispatch(replaceIngredient({ ingredientId, direction: 'up' }));
     };
 

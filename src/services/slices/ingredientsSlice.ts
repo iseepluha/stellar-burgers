@@ -38,7 +38,18 @@ export const ingredientsSlice = createSlice({
         state.error =
           action.error.message ?? 'Произошла ошибка при загрузке ингредиентов';
       });
+  },
+  selectors: {
+    selectIsIngredientsLoading: (state) => state.isIngredientsLoading,
+    selectIngredients: (state) => state.ingredients,
+    selectIngredientsError: (state) => state.error
   }
 });
 
 export default ingredientsSlice.reducer;
+
+export const {
+  selectIsIngredientsLoading,
+  selectIngredients,
+  selectIngredientsError
+} = ingredientsSlice.selectors;

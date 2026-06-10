@@ -38,7 +38,18 @@ export const profileOrdersSlice = createSlice({
         state.error =
           action.error.message || 'Не удалось загрузить ваши заказы';
       });
+  },
+  selectors: {
+    selectProfileOrders: (state) => state.orders,
+    selectProfileOrdersIsLoading: (state) => state.isLoading,
+    selectProfileOrdersError: (state) => state.error
   }
 });
 
 export default profileOrdersSlice.reducer;
+
+export const {
+  selectProfileOrders,
+  selectProfileOrdersIsLoading,
+  selectProfileOrdersError
+} = profileOrdersSlice.selectors;

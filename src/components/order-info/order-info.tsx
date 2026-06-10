@@ -1,10 +1,15 @@
 import { FC, useEffect, useMemo } from 'react';
-import { Preloader } from '../ui/preloader';
-import { OrderInfoUI } from '../ui/order-info';
+import { Preloader } from '@ui';
+import { OrderInfoUI } from '@ui';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
 import { useParams } from 'react-router-dom';
-import { getOrder } from '../../services/slices/orderDetailsSlice';
+import {
+  getOrder,
+  selectOrderDetailsIsLoading,
+  selectOrderDetailsOrders
+} from '../../services/slices/orderDetailsSlice';
+import { selectIngredients } from '../../services/slices/ingredientsSlice';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams();
@@ -15,14 +20,11 @@ export const OrderInfo: FC = () => {
     dispatch(getOrder(+number));
   }, [dispatch, number]);
 
-  const orderData = useSelector((state) => state.orderDetails.orders[0]);
-  const isLoading = useSelector((state) => state.orderDetails.isLoading);
+  const orderData = useSelector(selectOrderDetailsOrders);
+  const isLoading = useSelector(selectOrderDetailsIsLoading);
 
-  const ingredients: TIngredient[] = useSelector(
-    (state) => state.ingredients.ingredients
-  );
+  const ingredients: TIngredient[] = useSelector(selectIngredients);
 
-  /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
 

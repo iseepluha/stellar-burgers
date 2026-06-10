@@ -130,7 +130,7 @@ export const userSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(logoutUser.fulfilled, (state, action) => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.isLoading = false;
         state.user = null;
       })
@@ -138,6 +138,12 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message || 'Ошибка выхода из приложения';
       });
+  },
+  selectors: {
+    selectUser: (state) => state.user,
+    selectUserError: (state) => state.error,
+    selectIsAuthChecked: (state) => state.isAuthChecked,
+    selectIsUserLoading: (state) => state.isLoading
   }
 });
 
@@ -157,3 +163,10 @@ export const checkUserAuth = createAsyncThunk(
 export default userSlice.reducer;
 
 export const { authChecked } = userSlice.actions;
+
+export const {
+  selectUser,
+  selectUserError,
+  selectIsAuthChecked,
+  selectIsUserLoading
+} = userSlice.selectors;
